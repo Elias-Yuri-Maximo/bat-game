@@ -37,7 +37,16 @@ def main(screen):
             brick.set_position(position)
             cast["brick"].append(brick)
 
-    
+    #Create score
+    cast["marquee"] = []
+    position = Point(0,0)
+    marquee = Actor()
+    marquee.set_text('Bricks Remaining:280')
+    cast['marquee'] = [marquee]
+
+
+
+
     #create the ball
     x = int(constants.MAX_X / 2)
     y = int(constants.MAX_Y / 2)

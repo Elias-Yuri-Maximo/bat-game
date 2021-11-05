@@ -1,4 +1,6 @@
 import random
+import sys
+from typing import Text
 from game.point import Point
 from game import constants
 from game.action import Action
@@ -39,11 +41,27 @@ class HandleCollisionsAction(Action):
         paddle = cast["paddle"][0] # there's only one
         ball = cast["ball"][0] # there's only one
         bricks = cast["brick"]
+        marquee = cast["marquee"][0]
 
         #if the ball hits one of the bricks 
         for brick in bricks:
             if ball.get_position().equals(brick.get_position()):
                 brick.set_text('')
+                index = bricks.index(brick)
+                bricks.pop(index)
+
+                current_string = marquee.get_text().split(':')
+                current_score = int(current_string[1])
+                if current_score==0:
+                    sys.exit()
+                current_score-=1
+                current_string.pop()
+                current_string.append(':')
+                current_string.append(str(current_score))
+                text =''
+                for line in current_string: 
+                    text+=line    
+                marquee.set_text(text)
                 #bricks.remove(brick)
                 #Change if hits top
                 #self.ball_vertical_colision(ball)
@@ -60,7 +78,7 @@ class HandleCollisionsAction(Action):
         
     
         
-        for i in range(9):
+        for i in range(12):
             ball_x = ball.get_position().get_x()
             ball_y = ball.get_position().get_y()
             paddle_x = paddle.get_position().get_x()
