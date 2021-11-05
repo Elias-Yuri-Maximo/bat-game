@@ -1,6 +1,8 @@
 import random
+from game.point import Point
 from game import constants
 from game.action import Action
+
 
 class HandleCollisionsAction(Action):
     """A code template for handling collisions. The responsibility of this class of objects is to update the game state when actors collide.
@@ -8,6 +10,18 @@ class HandleCollisionsAction(Action):
     Stereotype:
         Controller
     """
+    #def ball_vertical_collision(self, ball): 
+    #    current_direction = ball.get_velocity()
+            
+    #    current_direction.set_y(current_direction.get_y * -1)
+
+    #    ball.set_direction(current_direction)
+
+        
+    #def ball_horizontal_collision(self, ball):
+
+
+
 
     def execute(self, cast):
         """Executes the action using the given actors.
@@ -24,12 +38,44 @@ class HandleCollisionsAction(Action):
 
         paddle = cast["paddle"][0] # there's only one
         ball = cast["ball"][0] # there's only one
-        brick = cast["brick"]
-    
+        bricks = cast["brick"]
+
+        #if the ball hits one of the bricks 
         for brick in bricks:
             if ball.get_position().equals(brick.get_position()):
-                #Here the code should set the brick text to ''
-                
-                
+                brick.set_text('')
+                #bricks.remove(brick)
+                #Change if hits top
+                #self.ball_vertical_colision(ball)
+        
+        #BALL_VERTICAL_COLISION METHOD
+                current_direction = ball.get_velocity()
+            
+                altered_direction = Point(current_direction.get_x(), current_direction.get_y() * -1)
+
+                ball.set_velocity(altered_direction)
+
+        #x = paddle.get_position().get_x()  
+        #x_list = []
+        
+    
+        
+        for i in range(9):
+            ball_x = ball.get_position().get_x()
+            ball_y = ball.get_position().get_y()
+            paddle_x = paddle.get_position().get_x()
+            paddle_y = paddle.get_position().get_y()
+
+
+               
+            if (ball_y == paddle_y) and (ball_x == paddle_x + i):  
                 #description = brick.get_description()
-                #marquee.set_text(description) 
+                #marquee.set_text(description)
+                #self.ball_horizontal_collision(ball)
+                current_direction = ball.get_velocity()
+            
+                altered_direction = Point(current_direction.get_x(), current_direction.get_y()* -1)
+
+                ball.set_velocity(altered_direction)
+
+
