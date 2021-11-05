@@ -22,7 +22,10 @@ def main(screen):
     paddle = Actor()
     paddle.set_text("===========")
     paddle.set_position(position)
-    cast["paddle"] = [paddle]
+    cast["paddle"]= [paddle]
+
+    #for x in range (2,10):
+    #position = Point
 
     #create the bricks
     cast["brick"] = []
@@ -53,11 +56,11 @@ def main(screen):
     output_service = OutputService(screen)
     control_actors_action = ControlActorsAction(input_service)
     move_actors_action = MoveActorsAction()
-    handle_collisions_acition = HandleCollisionsAction()
+    handle_collisions_action = HandleCollisionsAction()
     draw_actors_action = DrawActorsAction(output_service)
     
     script["input"] = [control_actors_action]
-    script["update"] = [move_actors_action, handle_collisions_acition]
+    script["update"] = [move_actors_action, handle_collisions_action]
     script["output"] = [draw_actors_action]
 
     # start the game
